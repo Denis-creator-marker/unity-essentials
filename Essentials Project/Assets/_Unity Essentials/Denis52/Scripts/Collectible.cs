@@ -10,5 +10,6 @@ public class Collectible : MonoBehaviour
     {
         transform.Rotate(_rotateX, _rotateY, _rotateZ);
         
+        
     }
 }

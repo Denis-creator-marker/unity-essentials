@@ -4,11 +4,13 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float _speed = 5.0f;
     [SerializeField] private float _rotationSpeed = 120f;
-    [SerializeField] private float jumpForce = 5.0f;
+    [SerializeField] private float _jumpForce = 5.0f;
+    [SerializeField] private float _secondJumpMultiplier = 6f;
 
     private Rigidbody _rigidbody;
     private int _jumpCount  = 0;
     private int _maxJumps = 2;
+    
 
     private void Start()
     {
@@ -26,8 +28,15 @@ public class PlayerController : MonoBehaviour
         if (Input.GetButtonDown("Jump") && _jumpCount < _maxJumps)
         {
             _jumpCount++;
-            _rigidbody.AddForce(Vector3.up * jumpForce, ForceMode.VelocityChange);
+
+            if (_jumpCount == 0)
+                _rigidbody.AddForce(Vector3.up * _jumpForce, ForceMode.VelocityChange);
+            else if (_jumpCount == 1)
+                _rigidbody.AddForce(Vector3.up * _jumpForce * _secondJumpMultiplier, ForceMode.VelocityChange); 
         }
+        
+        
+
     }
 
     private void MovePlayer()
